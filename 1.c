@@ -1,66 +1,80 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+/*
+int max_number(int a, int b, int c) {
+	int max = a;
+	if (b > max) {
+		max = b;
+	}
+	if (c > max) {
+		max = c;
+	}
+	return max;
+	
+}
+int main() {
+	int a, b, c;
+	
+	
+	printf("First number: ");
+	scanf("%d", &a);
 
-int arr[25][60];
-int score;
+	printf("Second number: ");
+	scanf("%d", &b);
 
-void map() {
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 60; j++) {
-			if (i == 0 || i == 24) {
-				arr[i][j] = 1;
-			}
-			else {
-				if (j == 0 || j == 59) {
-					arr[i][j] = 1;
-				}
-				else {
-					arr[i][j] = 0;
-				}
-			}
+	printf("Third number: ");
+	scanf("%d", &c);
+	printf("Max number is %d", max_number(a, b, c));
+}
+*/
+/*
+int sum_result(int a, int b) {
+	int sum = 0;
+	for (int i = 1; i < a + 1; i++) {
+		if (i % b == 0) {
+			sum += i;
 		}
-		printf("\n");
+	}
+	return sum;
+}
+int main() {
+	int a, b;
+	scanf("%d %d", &a, &b);
+	printf("Result : %d", sum_result(a, b));
+}
+*/
+/*
+int factorial(int a) {
+	if (a == 1) {
+		return 1;
+	}
+	else {
+		return a * factorial(a - 1);
 	}
 }
-void food() {
-	srand(time(NULL));
-	int x = rand() % 23 + 1;
-	int y = rand() % 58 + 1;
-	arr[x][y] = 3;
+int main() {
+	int a;
+	
+	printf("Enter a number: ");
+	scanf("%d", &a);
+	printf("Factorial of %d is %d", a, factorial(a));
 }
-void snake() {
-	arr[10][20] = 2;
-	arr[11][20] = 2;
-	arr[12][20] = 2;
-	arr[13][20] = 2;
-}
-void start() {
-	system("cls");
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 60; j++) {
-			if (arr[i][j] == 1) {
-				printf("¤±");
-			}
-			else if (arr[i][j] == 0) {
-				printf("  ");
-			}
-			else if (arr[i][j] == 3) {
-				printf("##");
-			}
-			else if (arr[i][j] == 2) {
-				printf("¤·");
-			}
+*/
+
+int gugudan(int a) {
+	for (int i = 2; i < a + 1; i++) {
+		printf(" #%ddan#     ", i);
+	}
+	printf("\n");
+	for (int i = 1; i < 10; i++) {
+		for (int j = 2; j < a + 1; j++) {
+			printf(" %d* %d=%2d    ", j, i, j * i);
 		}
 		printf("\n");
 	}
 }
 int main() {
-	while (1)
-	{
-		map();
-		snake();
-		food();
-		start();
-		Sleep(3000);
-	}
+	int a;
+	scanf("%d", &a);
+	gugudan(a);
 }
