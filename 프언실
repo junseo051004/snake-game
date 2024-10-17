@@ -1,0 +1,27 @@
+max_num = int(input())
+
+ 
+
+front= 0
+
+end = 1
+
+ 
+
+print(front, end = " ")
+
+print(end, end = " ")
+
+while True:
+
+    a = front + end
+
+    if a > max_num:
+
+        break
+
+    print(a, end = " ")
+
+    front = end
+
+    end = a
