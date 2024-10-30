@@ -1,0 +1,79 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
+
+int arr[25][60];
+int a, b; // 뱀의 머리 위치
+int score;
+int direction; // 방향 (0: 오른쪽, 1: 왼쪽)
+
+void map() {
+    for (int i = 0; i < 25; i++) { // 맵의 크기와 그 가장자리에 테두리 생성
+        for (int j = 0; j < 60; j++) {
+            if (i == 0 || i == 24) {
+                arr[i][j] = 1;
+            } else {
+                if (j == 0 || j == 59) {
+                    arr[i][j] = 1;
+                } else {
+                    arr[i][j] = 0;
+                }
+            }
+        }
+    }
+}
+
+void food() { // 무작위에서 먹이 생성
+    int x, y;
+    do {
+        x = rand() % 23 + 1; // 테두리를 제외한 x == 1 ~ 23 사이의 난수 지정
+        y = rand() % 58 + 1; // 테두리를 제외한 y == 1 ~ 58 사이의 난수 지정
+    } while (arr[x][y] != 0); // 빈 공간에서만 생성
+    arr[x][y] = 3; // x,y의 난수에서 먹이 생성
+}
+
+void snake() { // 뱀 생성
+    a = 10; b = 20; // 뱀 머리 위치
+    arr[a][b] = 2; // 뱀 머리
+    arr[a][b - 1] = 2; // 뱀 몸통
+    arr[a][b - 2] = 2; // 뱀 몸통
+}
+
+void start() {
+    system("cls");
+    
+    for (int i = 0; i < 25; i++) {
+        for (int j = 0; j < 60; j++) {
+            if (arr[i][j] == 1) { // 테두리
+                printf("EE");
+            } else if (arr[i][j] == 0) { // 빈칸
+                printf("  ");
+            } else if (arr[i][j] == 3) { // 먹이
+                printf("##");
+            } else if (arr[i][j] == 2) { // 뱀 모양
+                printf("GG");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    srand(time(NULL));
+    
+    map();
+    snake();
+    food();
+
+   while (1)
+    {
+        food();
+        start();
+        Sleep(2500);							/// 2.5초 동안 화면 멈춤 후 실행
+    }
+
+    return 0;
+}
