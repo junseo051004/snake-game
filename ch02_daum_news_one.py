@@ -23,6 +23,7 @@ doc = BeautifulSoup(result.text, "html.parser")
 
 # 4. 웹 크롤링
 # - select() → LIST Type
+
 title = doc.select("h3.tit_view")[0].get_text()
 
 contents = doc.select("section > p") # [<p>본1</p>,<p>본2</p> ]
@@ -30,13 +31,28 @@ content = ""
 for text in contents:
     # text → <p>본1</p>
     content += text.get_text() # → "본1 + 본2"
-    
+
+writer = doc.select("span.txt_info")[0].get_text()
 
 
+reg_date = doc.select("span.num_date")[0].get_text()
+# 2024.10.28.16:40
+list_date = reg_date.split(".")
+# 단독 strip()
+# reg_date = list_date[0] +list_date[1].strip()+list_date[2].strip()
+# 2.리스트 컴플린핸션
+# ["년", "월", "일", "시간"]
+# list__date = [x.strip() for x in list_date]
 
 
+#3. labda식
+# -map, reduce,fliter
+list_date = list(map(lambda x: x.strip(), list_date))
 
+reg_date = list_date[0] + list_date[1] + list_date[2]
+
+print(reg_date)
 print(f"뉴스제목: {title}")
-print("=" * 50)
-print(f"뉴스 본문: {contents}")
-
+print(f"뉴스 본문: {content}")
+print(f"뉴스 날짜: {reg_date}") 
+print(f"뉴스 기자: {writer}")
