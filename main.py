@@ -15,6 +15,7 @@
 
 import streamlit as st
 import pandas as pd
+from service import book_service
 
 ###################################################################################
 ## 1. 초기 설정 ##
@@ -75,7 +76,14 @@ st.markdown("<hr>", unsafe_allow_html=True)
 ## 3. BODY ###
 ##############
 def main_page():
-    pass
+    # 검색
+    # 조회(전체 ALL)
+    rows = book_service.get_books()
+    event = st.dataframe(rows,
+                         on_select="rerun",
+                         selection_mode="single-row",
+                         use_container_width=True,
+                         hide_index=True)
 def insert_page():
     pass
 def update_page():
